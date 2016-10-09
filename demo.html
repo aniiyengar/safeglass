@@ -28,6 +28,19 @@
 				font-size: 15px;
 				margin-top:0;
 			}
+
+			#demotext {
+				font-family: 'Roboto Slab';
+				font-size: 40px;
+				font-weight: 700;
+
+				width: 350px;
+				height: 80px;
+				position: fixed;
+				bottom: 20px;
+				left: 20px;
+				z-index: 100000;
+			}
 		</style>
 	</head>
 	<body>
@@ -37,6 +50,7 @@
 		<script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
 		
 		<div id="map"></div>
+		<div id="demotext">DataServer Demo</div>
 		
 		<script>
 			var map = L.map('map').setView([ 42.3614, -83.0958], 12);
