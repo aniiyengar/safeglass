@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<meta charset=utf-8 />
+		<title>Interactive Data Demo</title>
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
+
+		<!-- Load Leaflet from CDN-->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.0.0/dist/leaflet-src.js"></script>
+
+		<!-- Load Esri Leaflet from CDN -->
+		<script src="esri-leaflet.js"></script>
+
+		<style>
+			body { margin:0; padding:0; }
+			#map { position: absolute; top:0; bottom:0; right:0; left:0; }
+			.leaflet-popup-content h2 {
+				font-family: 'Roboto Slab';
+				font-size: 25px;
+				font-weight: 700;
+				margin-bottom: 2px;
+
+			}
+			.leaflet-popup-content p {
+				font-family: 'Lato';
+				font-size: 15px;
+				margin-top:0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script src="https://rawgit.com/Leaflet/Leaflet.heat/gh-pages/dist/leaflet-heat.js"></script>
+		
+		<script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
+		
+		<div id="map"></div>
+		
+		<script>
+			var map = L.map('map').setView([ 42.3614, -83.0958], 12);
+		
+			L.esri.basemapLayer('Gray').addTo(map);
+
+
+
+			var fl = L.esri.Heat.featureLayer({
+				url: 'https://mhacks-8-anthonytopper.c9users.io/get_map',
+				radius: 15,
+				opacity: 0.3,
+				gradient: {
+			      0.2: '#ffffff',
+			      0.4: '#dddddd',
+			      0.6: '#fbb',
+			      0.8: '#f03b20',
+			      1: '#bd0026'
+			    }
+			});
+
+			var fl2 = L.esri.featureLayer({
+				url: 'https://mhacks-8-anthonytopper.c9users.io/get_map',
+				pointToLayer: function(feature, latlng) { 
+					return new L.CircleMarker(latlng, {radius: (5 - feature.properties.severity.score)/1.5, fillOpacity: (5 - feature.properties.severity.score)/250.0, weight: 0, fillColor: '#f03b20'});
+				}
+			});
+
+			function cap1(str) {
+			     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+			}
+
+			function capAllWords(str) {
+				var splitStr = str.toLowerCase().split(' ');
+			   for (var i = 0; i < splitStr.length; i++) {
+			       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+			   }
+			   return splitStr.join(' '); 
+			}
+
+			fl2.bindPopup(function (evt) {
+				var monthNames = [
+				  "January", "February", "March",
+				  "April", "May", "June", "July",
+				  "August", "September", "October",
+				  "November", "December"
+				];
+				var date = new Date(evt.feature.properties.date);
+				var day = date.getDate();
+				var monthIndex = date.getMonth();
+				var year = date.getFullYear();
+
+				evt.feature.properties.date1 = monthNames[monthIndex] + ' ' + day + ', ' + year;
+				// if (evt.feature.properties.name == '') {
+				// 	evt.feature.properties.name = "Unknown"
+				// }
+				evt.feature.properties.name = evt.feature.properties.name || '';
+				evt.feature.properties.name = cap1(evt.feature.properties.name);
+				if (evt.feature.properties.location == '') {
+					evt.feature.properties.location = "Unknown"
+				}
+				else evt.feature.properties.location = capAllWords(evt.feature.properties.location);
+				evt.feature.properties.sevScore = -1 * parseInt(evt.feature.properties.severity.score);
+			    return L.Util.template('<h2>{date1}</h2><p><b>{name}</b><br/><b>Address:</b> {location}<br/><b>Severity Score:</b> {sevScore}</p>', evt.feature.properties);
+			  });
+
+			fl.addTo(map);
+
+			fl2.addTo(map);
+
+		</script>
+
+	</body>
+</html>

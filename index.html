@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SafeGlass</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.card {
+			width: 100vw;
+			max-width: 100%
+
+		}
+		#jumbo {
+			background: linear-gradient(rgba(0,40,100,0.8), rgba(0,40,100,0.8)), url('mappy.png');
+			background-size: cover;
+			background-position: center;
+			height: 500px;
+		}
+		#jumbo-text {
+			width: 900px;
+			height: 350px;
+
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+		}
+
+		#jumbo-text h1 {
+			font-family: 'Roboto Slab';
+			font-size: 100px;
+			font-weight: 700;
+			color: white;
+			text-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		#jumbo-text p {
+			font-family: Lato;
+			font-size: 40px;
+			line-height: 60px;
+			color: white;
+			font-weight: 400;
+		}
+
+		#jumbo-text #button {
+			font-family: 'Roboto Slab';
+			font-size: 30px;
+			font-weight: 700;
+			color: #003487;
+
+			padding: 15px;
+			width: 120px;
+			border-radius: 12px;
+			background-color: white;
+			margin-top: 40px;
+		}
+
+		#jumbo-text #button:hover {
+			cursor: pointer;
+			-webkit-box-shadow: -6px 7px 17px 0px rgba(0,0,0,0.5);
+			-moz-box-shadow: -6px 7px 17px 0px rgba(0,0,0,0.5);
+			box-shadow: -6px 7px 17px 0px rgba(0,0,0,0.5);
+		}
+
+		#about {
+
+		}
+
+		#about-content {
+			width: 900px;
+			margin: 90px auto;
+		}
+
+		h1 {
+			font-family: 'Roboto Slab';
+			font-size: 40px;
+			font-weight: 400;
+			color: #003487;
+		}
+
+		p {
+			font-family: Lato;
+			font-size: 25px;
+			line-height: 38px;
+			margin-top: 10px;
+			font-weight: 400;
+			color: black;
+		}
+
+		#about-content #future {
+			width: 900px;
+			border-radius: 40px;
+			margin: auto;
+			margin: 60px auto 0 auto;
+			text-align: center;
+		}
+
+		#interactive {
+			background-color: #003487;
+		}
+
+		#interactive-content {
+			width: 900px;
+			padding: 60px;
+			margin: auto;
+			text-align: center;
+			color: white;
+			cursor: pointer;
+		}
+
+		#interactive-content h1 {
+			color: white;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		#interactive-content h1:hover {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+		</style>
+
+
+	</head>
+	<body>
+		<div id="jumbo" class="card">
+			<div id="jumbo-text">
+				<h1>SafeGlass</h1>
+				<p>Safe, efficient travel comes to Google Glass</p>
+				<div id="button" onclick="location.href='demo.html';">DEMO</div>
+			</div>
+		</div>
+		<div id="about" class="card">
+			<div id="about-content">
+				<h1>A constant travel companion</h1>
+				<p>In large, often congested cities like Detroit, movement is cumbersome and information is elusive. SafeGlass solves both problems. It presents important information from crime statistics to parking locations, and does so in an intuitive way. We used the internal magnetic field detector and gyroscope in Google Glass to bring an old problem&mdash;safe and efficient city transportation&mdash;to the frontiers of augmented reality.</p>
+
+				<img id="future" src="future.png" />
+
+			</div>
+		</div>
+		<div id="interactive" class="card" onclick="location.href='demo.html'">
+			<div id="interactive-content">
+				<h1>Check out our interactive data demo</h1>
+			</div>
+		</div>
+	</body>
+</html>
